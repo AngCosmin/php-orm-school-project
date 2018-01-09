@@ -21,7 +21,7 @@ class LinkController
         }
         
         // Get logged in user
-        $logged_user = $_SESSION['user'];
+        $user_actions = new UserDAO($_SESSION['user']);
 
         // Check if link is already in database
         $link = Link::whereFirst(['url', $url]);
@@ -31,10 +31,10 @@ class LinkController
         }
 
         // Check if link is already associated with logged user
-        $has_link = UserLink::whereFirst([['user_id', $logged_user->id], ['link_id', $link->id]]);
+        $has_link = UserLink::whereFirst([['user_id', $user_actions->user->id], ['link_id', $link->id]]);
 
         if (!$has_link) {
-            $logged_user->addLink($link);
+            $user_actions->addLink($link);
             $_SESSION['message'] = 'Link added!';
         }
         else {

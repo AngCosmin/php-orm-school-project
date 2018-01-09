@@ -6,7 +6,7 @@ require_once(__DIR__ . '/Link.class.php');
 
 class UserNews extends Model 
 {
-    public static $table = 'user_news';
+    protected static $table = 'user_news';
     protected static $fields = ['id', 'user_id', 'news_id', 'shared'];
 
     public function user()

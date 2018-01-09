@@ -21,7 +21,12 @@
             ?>
         </h4>
 
-        <?php foreach ($_SESSION['user']->news() as $item) { ?>
+        <?php 
+            $user_actions = new UserDAO($_SESSION['user']);
+            $news = $user_actions->news();
+        ?>
+
+        <?php foreach ($news as $item) { ?>
         
             <div class="card text-center">
                 <div class="card-block">
@@ -38,9 +43,21 @@
                         ?>
                     </p>
                     
-                    <a href="<?php echo $item->origin_url ?>" class="btn btn-link mb-2" target="_blank">
+                    <a href="<?php echo $item->origin_url ?>" class="btn btn-link" target="_blank">
                         See full article
                     </a>
+
+                    <?php
+                        $is_shared = UserNews::whereFirst([['user_id', $_SESSION['user']->id], ['news_id', $item->id], ['shared', 1]])
+                    ?>
+
+                    <?php if (!$is_shared) { ?>
+                    <form action="/stiri/routes/web.php" method="POST" class="text-center mb-3">
+                        <input type="hidden" name="action" value="share">
+                        <input type="hidden" name="news_id" value="<?php echo $item->id ?>">
+                        <button type="submit" class="btn btn-sm btn-primary">Share</button>
+                    </form>
+                    <?php } ?>
 
                     <div class="mb-2">
                         <small class="text-muted"><?php echo $item->datetime ?></small>
@@ -48,6 +65,12 @@
                 </div>
             </div>
             <br>
+
+        <?php } ?>
+
+        <?php if (count($news) == 0) { ?>
+
+            <h4 class="text-center">You have no news...</h4>
 
         <?php } ?>
 

@@ -23,13 +23,19 @@
 
         <a href="/stiri/views/add-link"><button class="btn btn-secondary mb-3">Add new link</button></a>
 
+        <?php 
+            $user_actions = new UserDAO($_SESSION['user']);
+            $links = $user_actions->links();
+        ?>
+
         <div class="table-responsive">
             <table class="table table-bordered w-100">
                 <tr>
                     <th>Link</th>
                     <th>Action</th>
                 </tr>
-                <?php foreach ($_SESSION['user']->links() as $item) { ?>
+                
+                <?php foreach ($links as $item) { ?>
                     <tr>
                         <td><?php echo $item->link()->url ?></td>
                         <td>

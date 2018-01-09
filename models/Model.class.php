@@ -343,6 +343,62 @@ abstract class Model
         }
     }
 
+    public function save()
+    {
+        self::$database = Database::instance();   
+
+        // Get called class name
+        $called_class = get_called_class();
+
+        if (!isset($called_class::$table)) {
+            // If called class table is not set
+
+            throw new Exception('Table name for class ' . $called_class . ' is not defined. Please add \'protected static $table\' in your class.');
+        }
+
+        // Generate query
+        $table = $called_class::$table;             
+        $query = "UPDATE $table SET ";
+
+        foreach ($called_class::$fields as $index => $field) {
+            if ($field != 'id') {
+                if ($index > 1) {
+                    $query .= ', ' . $field . ' = :' . $field;
+                }
+                else {
+                    $query .= $field . ' = :' . $field;            
+                }
+            }
+        }
+
+        $query .= ' WHERE id = ' . $this->id;
+
+        // Prepare statement
+        $statement = self::$database->prepare($query);
+
+        // Bind params
+        foreach ($called_class::$fields as $index => $field) {
+            if ($field != 'id') {
+                if (is_numeric($this->{$field})) {
+                    $statement->bindParam(':' . $field, intval($this->{$field}), PDO::PARAM_INT);
+                }
+                else if (gettype($condition[$number_of_fields - 1]) == 'string') {
+                    $statement->bindParam(':' . $field, $this->{$field}, PDO::PARAM_STR);                    
+                }
+            }
+        }
+
+        try {
+            // Execute statement
+            $statement->execute();  
+
+            return true;
+        }
+        catch (Exception $e) {
+            return false;
+        }
+    }
+
     public static function deleteWhere(array $conditions) 
     {
         $array = self::where($conditions);

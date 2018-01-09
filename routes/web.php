@@ -29,5 +29,8 @@ if (isset($_POST['action'])) {
         case 'filter-link':
 
             break;
+        case 'share':
+            UserController::share($_POST);
+            break;
     }
 }
