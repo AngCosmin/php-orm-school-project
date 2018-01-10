@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/Link.class.php');  
+require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/Filter.class.php');  
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/UserDAO.class.php');  
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/UserLink.class.php');  
 
@@ -8,7 +9,7 @@ session_start();
 
 class LinkController 
 {
-    public static function addLink($request) 
+    public static function add($request) 
     {
         // Get data from request
         $url = $request['link'];
@@ -42,5 +43,35 @@ class LinkController
         }
 
         header('Location: /stiri/views/add-link');
+    }
+
+    public static function filter($request)
+    {
+        // Get data from request
+        $link_id = $request['link_id'];
+        $filter  = $request['filter'];
+
+        // Get user id
+        $user_id = $_SESSION['user']->id;
+
+        // Check if there is a filter set for logged user and link
+        $filter_db = Filter::whereFirst([['user_id', $user_id], ['link_id' => $link_id]]);
+
+        if ($filter_db) {
+            // Update the current filter 
+
+            $filter_db->filter = $filter;
+            $filter_db->save();
+
+            $_SESSION['message'] = 'Filter updated!';            
+        }
+        else {
+            // Create the filter
+
+            Filter::create(['user_id' => $user_id, 'link_id' => $link_id, 'filter' => $filter]);
+            $_SESSION['message'] = 'Filter created!';
+        }
+
+        header('Location: /stiri/views/filter?link_id=' . $link_id);
     }
 }

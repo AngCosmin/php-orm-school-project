@@ -3,6 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/UserController.clas
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/LinkController.class.php'); 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/AuthController.class.php'); 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/CommentController.class.php'); 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/NewsController.class.php'); 
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -16,10 +17,10 @@ if (isset($_POST['action'])) {
             AuthController::logout();
             break;
         case 'add-link':
-            LinkController::addLink($_POST);
+            LinkController::add($_POST);
             break;
         case 'update-link':
-            UserController::updateNews($_POST);
+            NewsController::update($_POST);
             break;
         case 'add-friend':
             UserController::addFriend($_POST);
@@ -27,8 +28,8 @@ if (isset($_POST['action'])) {
         case 'unfriend':
             UserController::unfriend($_POST);
             break;
-        case 'filter-link':
-
+        case 'filter':
+            LinkController::filter($_POST);
             break;
         case 'share':
             UserController::share($_POST);

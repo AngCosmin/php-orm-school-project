@@ -78,4 +78,15 @@ class UserDAO
 
         return $friends;
     }
+
+    public function filterActive($link_id)
+    {
+        $filter = Filter::whereFirst([['user_id', $this->user->id], ['link_id', $link_id]]);
+
+        if ($filter && $filter->filter != '') {
+            return true;
+        }
+
+        return false;
+    }
 }

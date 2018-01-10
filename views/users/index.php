@@ -32,7 +32,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered w-100">
                         <tr>
-                            <th>username</th>
+                            <th>Username</th>
                             <th>Action</th>
                         </tr>
                         <?php foreach (User::all() as $user) { ?>
@@ -67,7 +67,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered w-100">
                         <tr>
-                            <th>username</th>
+                            <th>Username</th>
                             <th>Action</th>
                         </tr>
                         <?php foreach ($friends as $friend) { ?>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Home</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
@@ -33,6 +33,7 @@
                 <tr>
                     <th>Link</th>
                     <th>Action</th>
+                    <th>Filter</th>
                 </tr>
                 
                 <?php foreach ($links as $item) { ?>
@@ -46,12 +47,16 @@
                                 <button type="submit" class="btn btn-sm btn-secondary">Update</button>
                             </form>
 
-                            <form action="/stiri/routes/web.php" method="POST" class="d-inline-block">
-                                <input type="hidden" name="action" value="filter-link">
-                                <input type="hidden" name="link_id" value="<?php echo $item->link()->id ?>">
-
+                            <a href="/stiri/views/filter?link_id=<?php echo $item->link()->id ?>">
                                 <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
-                            </form>
+                            </a>
+                        </td>
+                        <td>
+                            <?php if ($user_actions->filterActive($item->link()->id)) { ?>
+                                <span class="badge badge-success">Active</span>
+                            <?php } else { ?>
+                                <span class="badge badge-info">Inactive</span>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>

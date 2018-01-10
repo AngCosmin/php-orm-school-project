@@ -382,7 +382,7 @@ abstract class Model
                 if (is_numeric($this->{$field})) {
                     $statement->bindParam(':' . $field, intval($this->{$field}), PDO::PARAM_INT);
                 }
-                else if (gettype($condition[$number_of_fields - 1]) == 'string') {
+                else if (gettype($this->{$field}) == 'string') {
                     $statement->bindParam(':' . $field, $this->{$field}, PDO::PARAM_STR);                    
                 }
             }

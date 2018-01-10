@@ -106,9 +106,9 @@
         ?>
 
         <?php if (!$friends) { ?>
-            <h3 class="text-center">You have no friends...</h3>
+            <h4 class="text-center">You have no friends...</h4>
         <?php } else if ($number_of_news == 0) { ?>
-            <h3 class="text-center">Your friends didn't shared any news...</h3>
+            <h4 class="text-center">Your friends didn't shared any news...</h4>
         <?php } ?>
     </div>
 </body>
