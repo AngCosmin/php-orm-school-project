@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Users</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
@@ -32,14 +32,14 @@
                 <div class="table-responsive">
                     <table class="table table-bordered w-100">
                         <tr>
-                            <th>Email</th>
+                            <th>username</th>
                             <th>Action</th>
                         </tr>
                         <?php foreach (User::all() as $user) { ?>
-                            <?php if ($user->email != $_SESSION['user']->email) { ?>
+                            <?php if ($user->username != $_SESSION['user']->username) { ?>
 
                                 <tr>
-                                    <td><?php echo $user->email ?></td>
+                                    <td><?php echo $user->username ?></td>
                                     <td>
                                         <?php if (Friends::where([['user_id', $_SESSION['user']->id], ['friend_id', $user->id]])) { ?>
                                             <span class="text-muted">Already your friend</span>
@@ -67,13 +67,13 @@
                 <div class="table-responsive">
                     <table class="table table-bordered w-100">
                         <tr>
-                            <th>Email</th>
+                            <th>username</th>
                             <th>Action</th>
                         </tr>
                         <?php foreach ($friends as $friend) { ?>
 
                             <tr>
-                                <td><?php echo $friend->email ?></td>
+                                <td><?php echo $friend->username ?></td>
                                 <td>
                                     <form action="/stiri/routes/web.php" method="POST" class="d-inline-block">
                                         <input type="hidden" name="action" value="unfriend">

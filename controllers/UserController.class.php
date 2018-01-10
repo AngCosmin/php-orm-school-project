@@ -25,7 +25,7 @@ class UserController
             $keywords = str_replace(' ', ',', $title);
             
             $date = (string) $item->pubDate;
-            $date = strptime($date,'%a, %d %b %Y %H:%M:%S %Z');
+            $date = strptime($date, '%a, %d %b %Y %H:%M:%S %Z');
             $date = date("Y-m-d H:i:s", mktime($date['tm_hour'], $date['tm_min'], $date['tm_sec'], $date['tm_mon'] + 1, $date['tm_mday'], 1900 + $date['tm_year']));
             
             $news_in_db = News::whereFirst(['origin_url', $link]);

@@ -10,11 +10,11 @@ class AuthController {
         session_reset();
         
         // Get data from request
-        $email = $request['email'];
+        $username = $request['username'];
         $passsword = $request['password'];
 
         // Find user where data
-        $user = User::whereFirst([['email', $email], ['password', $passsword]]);
+        $user = User::whereFirst([['username', $username], ['password', $passsword]]);
 
         if ($user) {
             // If user was found

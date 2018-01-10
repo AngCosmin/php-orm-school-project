@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/UserController.class.php'); 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/LinkController.class.php'); 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/AuthController.class.php'); 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/controllers/CommentController.class.php'); 
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -31,6 +32,9 @@ if (isset($_POST['action'])) {
             break;
         case 'share':
             UserController::share($_POST);
+            break;
+        case 'add-comment':
+            CommentController::add($_POST);
             break;
     }
 }

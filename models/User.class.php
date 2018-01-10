@@ -5,7 +5,7 @@ require_once(__DIR__ . '/Model.class.php');
 class User extends Model 
 {
     protected static $table = 'users';
-    protected static $fields = ['id', 'email', 'password'];
+    protected static $fields = ['id', 'username', 'password'];
 
     public function links()
     {

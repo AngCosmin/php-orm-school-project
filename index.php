@@ -35,7 +35,7 @@
                     <input type="hidden" name="action" value="login" />
 
                     <div class="form-group">
-                        <input type="text" class="form-control" name="email" placeholder="Email" required="" autofocus="" autocomplete="off">
+                        <input type="text" class="form-control" name="username" placeholder="username" required="" autofocus="" autocomplete="off">
                     </div>
                     <div class="form-group">                    
                         <input type="password" class="form-control" name="password" placeholder="Password" required="" autocomplete="off">      

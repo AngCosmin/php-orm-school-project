@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/Link.class.php');  
-require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/User.class.php');  
+require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/UserDAO.class.php');  
 require_once($_SERVER['DOCUMENT_ROOT'] . '/stiri/models/UserLink.class.php');  
 
 session_start();

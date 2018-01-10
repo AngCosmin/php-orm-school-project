@@ -22,7 +22,7 @@
         <div class="text-center text-muted">
             Welcome 
             <?php 
-                echo $_SESSION['user']->email;
+                echo $_SESSION['user']->username;
             ?>
         </div>
         
